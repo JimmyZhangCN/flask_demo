@@ -2,6 +2,7 @@ from flask import Flask
 from flask import abort
 from flask import redirect
 from flask import make_response
+from flask import render_template
 
 app = Flask(__name__)
 
@@ -20,6 +21,11 @@ def resp():
     response = make_response('<h1>this document carries a cookie</h1>')
     response.set_cookie('answer', '42')
     return response
+
+@app.route('/hello/<name>')
+def ext_hello(name):
+    return render_template('hello.html', name=name)
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
